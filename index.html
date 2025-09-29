@@ -18,6 +18,8 @@
             --bg-color: #f4f6f8;
             --white-color: #fff;
             --header-height: 4rem;
+            --chat-bg-user: #e0e0e0; /* Fondo para mensajes del usuario */
+            --chat-bg-ai: #d4edda;   /* Fondo para mensajes de la IA */
         }
 
         * {
@@ -77,6 +79,8 @@
             border-radius: 0.5rem;
             font-weight: 600;
             transition: transform 0.3s;
+            cursor: pointer;
+            border: none;
         }
 
         .button:hover {
@@ -98,6 +102,12 @@
             z-index: 100;
             background-color: var(--white-color);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .header.scroll-header {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
         .nav {
@@ -213,6 +223,101 @@
             margin-top: 1.5rem;
         }
 
+        /* ======== CHAT INTERFAZ ======== */
+        .chat-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 0;
+            background-color: var(--white-color);
+            border-top: 1px solid #eee;
+        }
+
+        .chat-widget {
+            width: 100%;
+            max-width: 600px;
+            height: 600px;
+            border: 1px solid #ddd;
+            border-radius: 1rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background-color: var(--bg-color);
+        }
+
+        .chat-header {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--white-color);
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            word-wrap: break-word; /* Asegura que el texto largo se ajuste */
+        }
+
+        .message--user {
+            align-self: flex-end;
+            background-color: var(--chat-bg-user);
+            color: var(--text-color);
+            border-bottom-right-radius: 0;
+        }
+
+        .message--ai {
+            align-self: flex-start;
+            background-color: var(--chat-bg-ai);
+            color: #28a745; /* Un color ligeramente más oscuro para la IA */
+            border-bottom-left-radius: 0;
+        }
+
+        .chat-input-form {
+            display: flex;
+            border-top: 1px solid #eee;
+            padding: 1rem;
+            background-color: var(--white-color);
+        }
+
+        .chat-input-form input[type="text"] {
+            flex-grow: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            margin-right: 0.5rem;
+        }
+
+        .chat-input-form button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--white-color);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .chat-input-form button:hover {
+            transform: translateY(-2px);
+        }
+
+
         /* ======== FOOTER ======== */
         .footer {
             background-color: #333;
@@ -324,7 +429,7 @@
                     <li class="nav__item"><a href="#hero" class="nav__link">Inicio</a></li>
                     <li class="nav__item"><a href="#features" class="nav__link">Características</a></li>
                     <li class="nav__item"><a href="#use-cases" class="nav__link">Casos de Uso</a></li>
-                    <li class="nav__item"><a href="#contact" class="nav__link">Contacto</a></li>
+                    <li class="nav__item"><a href="#chat" class="nav__link">Probar Chat</a></li> <li class="nav__item"><a href="#contact" class="nav__link">Contacto</a></li>
                 </ul>
             </div>
             <div class="nav__toggle" id="nav-toggle">
@@ -338,7 +443,7 @@
                 <div class="hero__data">
                     <h1 class="hero__title">Conversaciones Inteligentes, Soluciones Instantáneas</h1>
                     <p class="hero__description">Potencia tu negocio o tu vida diaria con nuestra IA de chat avanzada.</p>
-                    <a href="#" class="button">Pruébalo Gratis</a>
+                    <a href="#chat" class="button">Pruébalo Gratis</a>
                     <a href="#" class="button button--ghost">Ver Demostración</a>
                 </div>
                 <div class="hero__img">
@@ -384,11 +489,26 @@
             </div>
         </section>
 
+        <section class="chat-section section" id="chat">
+            <div class="chat-widget">
+                <div class="chat-header">
+                    ¡Chatea con nuestra IA de prueba!
+                </div>
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message message--ai">¡Hola! Soy un asistente de IA. ¿En qué puedo ayudarte hoy?</div>
+                </div>
+                <form class="chat-input-form" id="chat-form">
+                    <input type="text" id="user-input" placeholder="Escribe tu mensaje..." required>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </section>
+
         <section class="contact section" id="contact">
             <div class="contact__container container">
                 <h2>¿Listo para transformar tus conversaciones?</h2>
                 <p>Únete a cientos de usuarios que ya están experimentando la diferencia.</p>
-                <a href="#" class="button">Comenzar Gratis Ahora</a>
+                <a href="#chat" class="button">Comenzar Gratis Ahora</a>
             </div>
         </section>
     </main>
@@ -403,49 +523,144 @@
         </div>
     </footer>
 
-    <script>
-        /* ======== MOSTRAR/OCULTAR MENÚ DE NAVEGACIÓN ======== */
-        const navMenu = document.getElementById('nav-menu');
-        const navToggle = document.getElementById('nav-toggle');
-        const navLinks = document.querySelectorAll('.nav__link');
+   <script>
+    /* ======== NAVEGACIÓN Y SCROLL HEADER (Mantenido) ======== */
+    const navMenu = document.getElementById('nav-menu');
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks = document.querySelectorAll('.nav__link');
+    const header = document.getElementById('header');
 
-        // Función para mostrar/ocultar el menú
-        if (navToggle) {
-            navToggle.addEventListener('click', () => {
-                navMenu.classList.toggle('show-menu');
+    if (navToggle) {
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('show-menu');
+        });
+    }
+
+    function linkAction() {
+        navMenu.classList.remove('show-menu');
+    }
+    navLinks.forEach(n => n.addEventListener('click', linkAction));
+
+    function scrollHeader() {
+        if (this.scrollY >= 50) {
+            header.classList.add('scroll-header');
+        } else {
+            header.classList.remove('scroll-header');
+        }
+    }
+    window.addEventListener('scroll', scrollHeader);
+
+    /* ======================================================= */
+    /* ======== LÓGICA DEL CHAT CON GEMINI API (Corregida) ===== */
+    /* ======================================================= */
+
+    // *** CONFIGURACIÓN DE LA API DE GEMINI ***
+    // ⚠️ ADVERTENCIA: Esta clave está expuesta. ¡Usar solo para prototipos!
+    const GEMINI_API_KEY = "AIzaSyCTHw8eAprGb9ttKwnA8L__FxTEV9c1K84"; 
+    const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
+    // ----------------------------------------
+
+    // Referencias a los elementos del DOM (¡CORREGIDAS!)
+    const chatMessages = document.getElementById('chat-messages'); // Es 'chat-messages', no 'chat-box'
+    const chatForm = document.getElementById('chat-form');
+    const userInput = document.getElementById('user-input');
+    // El botón 'Enviar' no tiene ID, lo obtenemos dentro del formulario
+    const sendButton = chatForm.querySelector('button[type="submit"]'); 
+
+
+    // Función para agregar un mensaje al chat
+    function addMessage(sender, text, isLoading = false) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+        messageElement.classList.add(sender === 'user' ? 'message--user' : 'message--ai');
+        
+        if (isLoading) {
+             messageElement.classList.add('loading-message');
+             messageElement.textContent = 'Escribiendo...'; 
+        } else {
+            messageElement.textContent = text;
+        }
+
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll automático al final
+        
+        return messageElement; // Devuelve la referencia para poder eliminar si es "cargando"
+    }
+
+    // Lógica para comunicarse con la API de Gemini
+    async function getAiResponse(userMessage) {
+        if (!GEMINI_API_KEY) {
+             return "ERROR: La clave API no está configurada.";
+        }
+        
+        try {
+            const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{ role: "user", parts: [{ text: userMessage }] }],
+                    generationConfig: {
+                        temperature: 0.7, 
+                    }
+                })
             });
-        }
 
-        // Función para ocultar el menú al hacer clic en un enlace (para móvil)
-        function linkAction() {
-            navMenu.classList.remove('show-menu');
-        }
-        navLinks.forEach(n => n.addEventListener('click', linkAction));
-
-        /* ======== CAMBIAR EL FONDO DEL HEADER AL HACER SCROLL ======== */
-        function scrollHeader() {
-            const header = document.getElementById('header');
-            // Cuando el scroll es mayor que 50px de altura, añade la clase 'scroll-header'
-            if (this.scrollY >= 50) {
-                header.classList.add('scroll-header');
-            } else {
-                header.classList.remove('scroll-header');
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Error de la API:", errorData);
+                return `Error de la API de Gemini: ${errorData.error.message || response.statusText}`;
             }
+
+            const data = await response.json();
+            return data.candidates[0].content.parts[0].text;
+            
+        } catch (error) {
+            console.error("Error de red o desconocido:", error);
+            return "Lo siento, no pude comunicarme con el servicio de IA. Revisa tu conexión a internet.";
         }
-        window.addEventListener('scroll', scrollHeader);
+    }
 
-        // Agregamos un estilo para 'scroll-header' para que cambie el fondo al hacer scroll
-        // Esto sería idealmente en el CSS, pero para mantener todo junto, lo añado aquí como un recordatorio
-        // En un proyecto real, estaría en el archivo CSS.
-        const style = document.createElement('style');
-        style.innerHTML = `
-            .scroll-header {
-                background-color: rgba(255, 255, 255, 0.9);
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            }
-        `;
-        document.head.appendChild(style);
 
-    </script>
+    // Función principal para manejar el envío
+    async function sendMessage(e) {
+        // En caso de venir de un submit de formulario (tecla enter)
+        if (e && e.type === 'submit') {
+             e.preventDefault(); 
+        }
+
+        const messageText = userInput.value.trim();
+        
+        if (messageText === "") {
+            return;
+        }
+
+        // 1. Mostrar el mensaje del usuario
+        addMessage('user', messageText);
+        userInput.value = '';
+        
+        // 2. Deshabilitar la interfaz y mostrar estado de espera
+        userInput.disabled = true;
+        sendButton.disabled = true;
+        
+        // 3. Mostrar mensaje de "Escribiendo..."
+        const loadingDiv = addMessage("", "Escribiendo...", true); 
+
+        // 4. Obtener la respuesta real de Gemini
+        const aiResponse = await getAiResponse(messageText);
+
+        // 5. Eliminar el mensaje de carga y añadir la respuesta final
+        chatMessages.removeChild(loadingDiv); 
+        addMessage('ai', aiResponse);
+
+        // 6. Habilitar la entrada
+        userInput.disabled = false;
+        sendButton.disabled = false;
+        userInput.focus();
+    }
+
+    // Asignar los eventos al formulario (para botón y tecla Enter)
+    chatForm.addEventListener('submit', sendMessage);
+
+</script>
 </body>
 </html>
